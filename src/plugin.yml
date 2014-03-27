@@ -1,0 +1,8 @@
+name: EdgeFeelings
+version: beta
+author: ase34
+website: http://edgecraft.de
+
+depend: [EdgeCore]
+
+main: net.edgecraft.edgefeelings.EdgeFeelingsPlugin
