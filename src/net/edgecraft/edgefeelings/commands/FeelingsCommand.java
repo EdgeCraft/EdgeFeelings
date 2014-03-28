@@ -33,7 +33,7 @@ public class FeelingsCommand extends AbstractCommand {
         FeelingUser feelingUser = EdgeFeelingsAPI.getFeelingUser(user);
         
         Feeling selected = null;
-        if (args.length > 0) {
+        if (args.length > 1) {
             try {
                 FeelingType selectedType = FeelingType.valueOf(args[0]);
                 selected = feelingUser.getFeelings().get(selectedType);
@@ -42,10 +42,10 @@ public class FeelingsCommand extends AbstractCommand {
         }
         
         if (selected != null) {
-            getFeelingStatus(selected);
+            player.sendMessage(getFeelingStatus(selected));
         } else {
             for (Feeling feeling : feelingUser.getFeelings().values()) {
-                getFeelingStatus(feeling);
+                player.sendMessage(getFeelingStatus(feeling));
             }
         }
         return true;
