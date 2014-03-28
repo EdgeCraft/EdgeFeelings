@@ -10,7 +10,7 @@ public class FeelingUsersMap extends HashMap<User, FeelingUser> {
 
     public FeelingUser registerUser(User user) {
         if (containsKey(user)) {
-            return get(user);
+            return super.get(user);
         }
         
         FeelingUser feelingUser = new FeelingUser(user);
