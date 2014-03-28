@@ -27,7 +27,7 @@ public class FeelingZeroEvent extends Event {
         return handlers;
     }
 
-    public FeelingUser getUser() {
+    public FeelingUser getFeelingUser() {
         return user;
     }
 

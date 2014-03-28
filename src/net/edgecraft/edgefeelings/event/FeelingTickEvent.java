@@ -30,7 +30,7 @@ public class FeelingTickEvent extends Event implements Cancellable {
         return handlers;
     }
 
-    public FeelingUser getUser() {
+    public FeelingUser getFeelingUser() {
         return user;
     }
 
