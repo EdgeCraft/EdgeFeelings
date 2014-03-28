@@ -16,6 +16,7 @@ import net.edgecraft.edgefeelings.FeelingType;
 import net.edgecraft.edgefeelings.FeelingUser;
 import net.edgecraft.edgefeelings.util.FeelingUsersMap;
 
+@SuppressWarnings("unused")
 public class FeelingsCommand extends AbstractCommand {
 
     @Override

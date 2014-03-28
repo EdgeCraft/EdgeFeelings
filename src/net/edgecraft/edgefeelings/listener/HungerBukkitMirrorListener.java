@@ -10,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
+@SuppressWarnings("unused")
 public class HungerBukkitMirrorListener implements Listener {
     
     private HashMap<String, Integer> lastFoodLevels = new HashMap<>();

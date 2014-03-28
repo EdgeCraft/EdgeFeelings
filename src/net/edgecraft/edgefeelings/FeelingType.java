@@ -3,6 +3,7 @@ package net.edgecraft.edgefeelings;
 import java.util.Arrays;
 import java.util.Collection;
 
+@SuppressWarnings("unused")
 public enum FeelingType {
 
     HUNGER(20, 20, 0), 
