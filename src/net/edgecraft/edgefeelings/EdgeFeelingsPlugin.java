@@ -1,5 +1,6 @@
 package net.edgecraft.edgefeelings;
 
+import net.edgecraft.edgefeelings.listener.FeelingTickListener;
 import net.edgecraft.edgefeelings.listener.PlayerListener;
 import net.edgecraft.edgefeelings.runnable.FeelingUpdaterRunnable;
 import net.edgecraft.edgefeelings.util.FeelingPlayersMap;
@@ -17,6 +18,7 @@ public class EdgeFeelingsPlugin extends JavaPlugin {
         map = new FeelingPlayersMap();
         
         getServer().getPluginManager().registerEvents(new PlayerListener(), this);
+        getServer().getPluginManager().registerEvents(new FeelingTickListener(), this);
         getServer().getScheduler().runTaskTimer(this, new FeelingUpdaterRunnable(), 1, 1);
     }
 

@@ -1,15 +1,13 @@
 package net.edgecraft.edgefeelings;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
-
-import org.bukkit.Bukkit;
 
 import net.edgecraft.edgefeelings.display.DisplayHandler;
-import net.edgecraft.edgefeelings.util.ModifierSet;
+import net.edgecraft.edgefeelings.event.FeelingTickEvent;
+import net.edgecraft.edgefeelings.event.FeelingZeroEvent;
+
+import org.bukkit.Bukkit;
 
 @SuppressWarnings("unused")
 public class Feeling {
@@ -20,9 +18,6 @@ public class Feeling {
     
     private double currentValue;
     private double currentMaxValue;
-    
-    private final ModifierSet maxValueModifiers;
-    private final ModifierSet valueModifiers;
     
     public static HashMap<FeelingType, Feeling> getDefaultFeelings() {
         HashMap<FeelingType, Feeling> feelings = new HashMap<FeelingType, Feeling>();
@@ -41,20 +36,12 @@ public class Feeling {
         this.type = type;
         this.currentValue = currentValue;
         this.currentMaxValue = type.getDefaultMaxValue();
-        this.maxValueModifiers = new ModifierSet();
-        this.valueModifiers = new ModifierSet();
-        this.displayHandlers = Arrays.asList(type.getDefaultDisplayHandler());
-        
-        maxValueModifiers.addAll(type.getDefaultMaxValueModifiers());
-        valueModifiers.addAll(type.getDefaultValueModifiers());
+        this.displayHandlers = type.getDefaultDisplayHandlers();
     }
 
     public void onTick(FeelingUser feelingUser) {
-        double movment = valueModifiers.applyModifiers(feelingUser, this, 0);
-        double newMaxValue = maxValueModifiers.applyModifiers(feelingUser, this, 0);
-        
-        this.currentMaxValue = newMaxValue;
-        this.currentValue = Math.min(currentValue + movment, newMaxValue);
+        FeelingTickEvent event = new FeelingTickEvent(feelingUser, this);
+        Bukkit.getServer().getPluginManager().callEvent(event);
         
         if (displayHandlers != null) {
             for (DisplayHandler handler : displayHandlers) {
@@ -79,16 +66,16 @@ public class Feeling {
         return currentMaxValue;
     }
 
-    public ModifierSet getMaxValueModifiers() {
-        return maxValueModifiers;
-    }
-
-    public ModifierSet getValueModifiers() {
-        return valueModifiers;
+    public void setCurrentMaxValue(double currentMaxValue) {
+        this.currentMaxValue = currentMaxValue;
     }
 
     public void setCurrentValue(double currentValue) {
         this.currentValue = currentValue;
+    }
+    
+    public void addToCurrentValue(double increment) {
+        this.currentValue += increment;
     }
 
     public Collection<DisplayHandler> getDisplayHandlers() {
