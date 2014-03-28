@@ -1,9 +1,7 @@
 package net.edgecraft.edgefeelings;
 
-import java.util.Collection;
 import java.util.HashMap;
 
-import net.edgecraft.edgefeelings.display.DisplayHandler;
 import net.edgecraft.edgefeelings.event.FeelingTickEvent;
 
 import org.bukkit.Bukkit;
@@ -11,8 +9,6 @@ import org.bukkit.Bukkit;
 public class Feeling {
 
     private final FeelingType type;
-    
-    private final Collection<DisplayHandler> displayHandlers;
     
     private double currentValue;
     private double currentMaxValue;
@@ -34,18 +30,11 @@ public class Feeling {
         this.type = type;
         this.currentValue = currentValue;
         this.currentMaxValue = type.getDefaultMaxValue();
-        this.displayHandlers = type.getDefaultDisplayHandlers();
     }
 
     public void onTick(FeelingUser feelingUser) {
         FeelingTickEvent event = new FeelingTickEvent(feelingUser, this);
         Bukkit.getServer().getPluginManager().callEvent(event);
-        
-        if (displayHandlers != null) {
-            for (DisplayHandler handler : displayHandlers) {
-                handler.display(feelingUser, this);
-            }
-        }
     }
 
     public FeelingType getType() {
@@ -70,10 +59,6 @@ public class Feeling {
     
     public void addToCurrentValue(double increment) {
         this.currentValue += increment;
-    }
-
-    public Collection<DisplayHandler> getDisplayHandlers() {
-        return displayHandlers;
     }
     
 }

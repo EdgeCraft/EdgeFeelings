@@ -3,6 +3,7 @@ package net.edgecraft.edgefeelings;
 import net.edgecraft.edgecore.EdgeCoreAPI;
 import net.edgecraft.edgefeelings.commands.FeelingsCommand;
 import net.edgecraft.edgefeelings.listener.FeelingTickListener;
+import net.edgecraft.edgefeelings.listener.HungerBukkitMirrorListener;
 import net.edgecraft.edgefeelings.listener.PlayerListener;
 import net.edgecraft.edgefeelings.runnable.FeelingUpdaterRunnable;
 import net.edgecraft.edgefeelings.util.FeelingUsersMap;
@@ -21,6 +22,8 @@ public class EdgeFeelingsPlugin extends JavaPlugin {
         
         getServer().getPluginManager().registerEvents(new PlayerListener(), this);
         getServer().getPluginManager().registerEvents(new FeelingTickListener(), this);
+        getServer().getPluginManager().registerEvents(new HungerBukkitMirrorListener(), this);
+        
         getServer().getScheduler().runTaskTimer(this, new FeelingUpdaterRunnable(), 1, 1);
         
         EdgeCoreAPI.commandsAPI().registerCommand(new FeelingsCommand());
