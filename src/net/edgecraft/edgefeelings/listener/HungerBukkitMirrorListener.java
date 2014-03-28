@@ -4,10 +4,13 @@ import java.util.HashMap;
 
 import net.edgecraft.edgecore.user.User;
 import net.edgecraft.edgefeelings.Feeling;
+import net.edgecraft.edgefeelings.FeelingType;
 import net.edgecraft.edgefeelings.event.FeelingTickEvent;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
 @SuppressWarnings("unused")
@@ -15,6 +18,7 @@ public class HungerBukkitMirrorListener implements Listener {
 
     private HashMap<String, Integer> lastFoodLevels = new HashMap<>();
 
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void mirrorHungerToBukkit(FeelingTickEvent ev) {
         Player player = Bukkit.getPlayerExact(ev.getFeelingUser().getUser().getName());
         if (player == null) {
@@ -25,6 +29,10 @@ public class HungerBukkitMirrorListener implements Listener {
         int lastFoodLevel = lastFoodLevels.containsKey(name) ? lastFoodLevels.get(name) : 20;
 
         Feeling feeling = ev.getFeeling();
+        if (feeling.getType() != FeelingType.HUNGER) {
+            return;
+        }
+        
         int foodLevel = (int) Math
                 .ceil((feeling.getCurrentValue() / feeling.getCurrentMaxValue()) * 20);
         if (lastFoodLevel != foodLevel) {
