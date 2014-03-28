@@ -6,7 +6,7 @@ import net.edgecraft.edgecore.user.User;
 import net.edgecraft.edgefeelings.FeelingUser;
 
 @SuppressWarnings("serial")
-public class FeelingPlayersMap extends HashMap<User, FeelingUser> {
+public class FeelingUsersMap extends HashMap<User, FeelingUser> {
 
     public FeelingUser registerUser(User user) {
         if (containsKey(user)) {
@@ -16,6 +16,14 @@ public class FeelingPlayersMap extends HashMap<User, FeelingUser> {
         FeelingUser feelingUser = new FeelingUser(user);
         put(user, feelingUser);
         return feelingUser;
+    }
+
+    @Override
+    public FeelingUser get(Object key) {
+        if (key instanceof User) {
+            registerUser((User) key);
+        }
+        return super.get(key);
     }
 
 }

@@ -1,22 +1,22 @@
 package net.edgecraft.edgefeelings;
 
 import net.edgecraft.edgecore.user.User;
-import net.edgecraft.edgefeelings.util.FeelingPlayersMap;
+import net.edgecraft.edgefeelings.util.FeelingUsersMap;
 
 public class EdgeFeelingsAPI {
 
     private static final EdgeFeelingsPlugin plugin = EdgeFeelingsPlugin.getSingleton();
     
-    public static FeelingUser getFeelingPlayer(User user) {
-        return plugin.getFeelingPlayers().get(user);
+    public static FeelingUser getFeelingUser(User user) {
+        return plugin.getFeelingUsers().get(user);
     }
     
-    public static FeelingPlayersMap getFeelingPlayers() {
-        return plugin.getFeelingPlayers();
+    public static FeelingUsersMap getFeelingUsers() {
+        return plugin.getFeelingUsers();
     }
     
     public static FeelingUser registerFeelingUser(User user) {
-        return plugin.getFeelingPlayers().registerUser(user);
+        return plugin.getFeelingUsers().registerUser(user);
     }
     
 }

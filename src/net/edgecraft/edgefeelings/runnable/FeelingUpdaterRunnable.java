@@ -10,7 +10,7 @@ public class FeelingUpdaterRunnable implements Runnable {
     @Override
     public void run() {
         for (User user : EdgeCoreAPI.userAPI().getUsers().values()) {
-            FeelingUser feelingUser = EdgeFeelingsAPI.getFeelingPlayer(user);
+            FeelingUser feelingUser = EdgeFeelingsAPI.getFeelingUser(user);
             
             if (feelingUser != null) {
                 feelingUser.tickFeelings();
