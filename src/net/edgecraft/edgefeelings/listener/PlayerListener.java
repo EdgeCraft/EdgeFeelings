@@ -18,5 +18,5 @@ public class PlayerListener implements Listener {
             EdgeFeelingsAPI.registerFeelingUser(user);
         }
     }
-    
+
 }

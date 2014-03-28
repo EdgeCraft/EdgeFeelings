@@ -10,7 +10,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
 public class FeelingTickListener implements Listener {
-    
+
     @EventHandler(priority = EventPriority.LOW)
     public void onFeelingTick(FeelingTickEvent ev) {
         FeelingType type = ev.getFeeling().getType();
@@ -18,12 +18,12 @@ public class FeelingTickListener implements Listener {
         if (player == null) {
             return;
         }
-        
+
         if (type == FeelingType.HUNGER) {
             ev.getFeeling().setCurrentValue(player.getFoodLevel());
             return;
         }
-        
+
         ev.getFeeling().addToCurrentValue(type.getDefaultChangement());
     }
 

@@ -8,11 +8,11 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 public class FeelingTickEvent extends Event implements Cancellable {
-    
+
     private static final HandlerList handlers = new HandlerList();
-    
+
     private boolean cancelled = false;
-    
+
     private FeelingUser user;
     private Feeling feeling;
 
@@ -25,7 +25,7 @@ public class FeelingTickEvent extends Event implements Cancellable {
     public HandlerList getHandlers() {
         return handlers;
     }
-     
+
     public static HandlerList getHandlerList() {
         return handlers;
     }
@@ -47,5 +47,5 @@ public class FeelingTickEvent extends Event implements Cancellable {
     public void setCancelled(boolean cancel) {
         cancelled = cancel;
     }
-    
+
 }

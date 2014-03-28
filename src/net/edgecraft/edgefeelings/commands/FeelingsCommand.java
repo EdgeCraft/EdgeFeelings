@@ -26,13 +26,13 @@ public class FeelingsCommand extends AbstractCommand {
 
     @Override
     public String[] getNames() {
-        return new String[] {"feelings", "feels"};
+        return new String[] { "feelings", "feels" };
     }
 
     @Override
     public boolean runImpl(Player player, User user, String[] args) throws Exception {
         FeelingUser feelingUser = EdgeFeelingsAPI.getFeelingUser(user);
-        
+
         Feeling selected = null;
         if (args.length > 1) {
             try {
@@ -41,7 +41,7 @@ public class FeelingsCommand extends AbstractCommand {
             } catch (IllegalArgumentException e) {
             }
         }
-        
+
         if (selected != null) {
             player.sendMessage(getFeelingStatus(selected));
         } else {
@@ -50,11 +50,12 @@ public class FeelingsCommand extends AbstractCommand {
             }
         }
         return true;
-        
+
     }
-    
+
     private String getFeelingStatus(Feeling feeling) {
-        return String.format("%s: %f / %f", feeling.getType().toString(), feeling.getCurrentValue(), feeling.getCurrentMaxValue());
+        return String.format("%s: %f / %f", feeling.getType().toString(),
+                feeling.getCurrentValue(), feeling.getCurrentMaxValue());
     }
 
     @Override
@@ -62,7 +63,7 @@ public class FeelingsCommand extends AbstractCommand {
         StringBuilder builder = new StringBuilder();
         builder.append(EdgeCore.usageColor + "/feelings ");
         builder.append("[" + StringUtils.join(FeelingType.values(), "'") + "]");
-        
+
         sender.sendMessage(builder.toString());
     }
 

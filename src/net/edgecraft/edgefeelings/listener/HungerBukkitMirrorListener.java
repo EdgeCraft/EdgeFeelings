@@ -12,25 +12,26 @@ import org.bukkit.event.Listener;
 
 @SuppressWarnings("unused")
 public class HungerBukkitMirrorListener implements Listener {
-    
+
     private HashMap<String, Integer> lastFoodLevels = new HashMap<>();
-    
+
     public void mirrorHungerToBukkit(FeelingTickEvent ev) {
         Player player = Bukkit.getPlayerExact(ev.getFeelingUser().getUser().getName());
         if (player == null) {
             return;
         }
-        
+
         String name = player.getName();
         int lastFoodLevel = lastFoodLevels.containsKey(name) ? lastFoodLevels.get(name) : 20;
 
         Feeling feeling = ev.getFeeling();
-        int foodLevel = (int) Math.ceil(((feeling.getCurrentValue() / feeling.getCurrentMaxValue()) * 20));
+        int foodLevel = (int) Math
+                .ceil((feeling.getCurrentValue() / feeling.getCurrentMaxValue()) * 20);
         if (lastFoodLevel != foodLevel) {
             player.setFoodLevel(Math.min(foodLevel, 20));
         }
-        
+
         lastFoodLevels.put(name, foodLevel);
     }
-    
+
 }

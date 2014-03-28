@@ -11,21 +11,21 @@ import net.edgecraft.edgefeelings.util.FeelingUsersMap;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class EdgeFeelingsPlugin extends JavaPlugin {
-    
+
     private static EdgeFeelingsPlugin singleton;
-    
+
     private FeelingUsersMap map;
 
     @Override
     public void onEnable() {
         map = new FeelingUsersMap();
-        
+
         getServer().getPluginManager().registerEvents(new PlayerListener(), this);
         getServer().getPluginManager().registerEvents(new FeelingTickListener(), this);
         getServer().getPluginManager().registerEvents(new HungerBukkitMirrorListener(), this);
-        
+
         getServer().getScheduler().runTaskTimer(this, new FeelingUpdaterRunnable(), 1, 1);
-        
+
         EdgeCoreAPI.commandsAPI().registerCommand(new FeelingsCommand());
     }
 
@@ -33,7 +33,7 @@ public class EdgeFeelingsPlugin extends JavaPlugin {
     public void onLoad() {
         EdgeFeelingsPlugin.singleton = this;
     }
-    
+
     public static EdgeFeelingsPlugin getSingleton() {
         return singleton;
     }

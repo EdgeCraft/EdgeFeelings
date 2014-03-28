@@ -13,8 +13,8 @@ public class FeelingsMap extends HashMap<FeelingType, Feeling> {
                 super.put(type, new Feeling(type));
             }
         }
-        
+
         return super.get(key);
     }
-    
+
 }

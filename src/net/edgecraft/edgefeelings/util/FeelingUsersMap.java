@@ -12,7 +12,7 @@ public class FeelingUsersMap extends HashMap<User, FeelingUser> {
         if (containsKey(user)) {
             return super.get(user);
         }
-        
+
         FeelingUser feelingUser = new FeelingUser(user);
         put(user, feelingUser);
         return feelingUser;

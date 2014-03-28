@@ -11,7 +11,7 @@ import org.apache.commons.lang.Validate;
 public class FeelingUser {
 
     private final User user;
-    
+
     private final HashMap<FeelingType, Feeling> feelings;
 
     public FeelingUser(User user) {
@@ -24,7 +24,7 @@ public class FeelingUser {
         this.user = user;
         this.feelings = feelings;
     }
-    
+
     public void tickFeelings() {
         for (Feeling feeling : feelings.values()) {
             feeling.onTick(this);
@@ -38,5 +38,5 @@ public class FeelingUser {
     public HashMap<FeelingType, Feeling> getFeelings() {
         return feelings;
     }
-    
+
 }

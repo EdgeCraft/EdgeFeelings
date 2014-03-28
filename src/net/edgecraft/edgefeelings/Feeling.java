@@ -9,23 +9,23 @@ import org.bukkit.Bukkit;
 public class Feeling {
 
     private final FeelingType type;
-    
+
     private double currentValue;
     private double currentMaxValue;
-    
+
     public static HashMap<FeelingType, Feeling> getDefaultFeelings() {
         HashMap<FeelingType, Feeling> feelings = new HashMap<FeelingType, Feeling>();
         for (FeelingType type : FeelingType.values()) {
             feelings.put(type, new Feeling(type));
         }
-        
+
         return feelings;
     }
-    
+
     public Feeling(FeelingType type) {
         this(type, type.getDefaultInitialValue());
     }
-    
+
     public Feeling(FeelingType type, double currentValue) {
         this.type = type;
         this.currentValue = currentValue;
@@ -56,9 +56,9 @@ public class Feeling {
     public void setCurrentValue(double currentValue) {
         this.currentValue = currentValue;
     }
-    
+
     public void addToCurrentValue(double increment) {
         this.currentValue += increment;
     }
-    
+
 }
