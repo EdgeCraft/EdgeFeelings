@@ -5,11 +5,9 @@ import java.util.HashMap;
 
 import net.edgecraft.edgefeelings.display.DisplayHandler;
 import net.edgecraft.edgefeelings.event.FeelingTickEvent;
-import net.edgecraft.edgefeelings.event.FeelingZeroEvent;
 
 import org.bukkit.Bukkit;
 
-@SuppressWarnings("unused")
 public class Feeling {
 
     private final FeelingType type;
@@ -47,10 +45,6 @@ public class Feeling {
             for (DisplayHandler handler : displayHandlers) {
                 handler.display(feelingUser, this);
             }
-        }
-        
-        if (currentValue <= 0) {
-            Bukkit.getServer().getPluginManager().callEvent(new FeelingZeroEvent(feelingUser, this));
         }
     }
 
