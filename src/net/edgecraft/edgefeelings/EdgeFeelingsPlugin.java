@@ -19,6 +19,11 @@ public class EdgeFeelingsPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         map = new FeelingUsersMap();
+        try {
+            map.readFromDatabase();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         getServer().getPluginManager().registerEvents(new PlayerListener(), this);
         getServer().getPluginManager().registerEvents(new FeelingTickListener(), this);
@@ -40,6 +45,15 @@ public class EdgeFeelingsPlugin extends JavaPlugin {
 
     public FeelingUsersMap getFeelingUsers() {
         return map;
+    }
+
+    @Override
+    public void onDisable() {
+        try {
+            map.saveToDatabase();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
