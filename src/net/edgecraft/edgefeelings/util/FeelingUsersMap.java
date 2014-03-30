@@ -59,7 +59,7 @@ public class FeelingUsersMap extends HashMap<User, FeelingUser> {
                     
                     update.execute();
                 } else {
-                    PreparedStatement insert = EdgeCoreAPI.databaseAPI().prepareQuery("INSERT INTO edgefeelings_feelings (id, feeling_type, value, max_value) VALUES (?, ?, ?, ?)");
+                    PreparedStatement insert = EdgeCoreAPI.databaseAPI().prepareUpdate("INSERT INTO edgefeelings_feelings (id, feeling_type, value, max_value) VALUES (?, ?, ?, ?)");
                     insert.setInt(1, user.getUser().getID());
                     insert.setString(2, feeling.getType().toString());
                     insert.setDouble(3, currentValue);
